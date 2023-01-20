@@ -14,7 +14,7 @@ jobs:
           cmake . -B build
           make -C build/dmg -j8
   publish-to-dockerhub:
-    needs: build-and-test
+    needs: build-dmg
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
