@@ -13,6 +13,11 @@ jobs:
           cd libdmg-hfsplus
           cmake . -B build
           make -C build/dmg -j8
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: dmg-binary
+          path: libdmg-hfsplus/build/dmg/dmg
   publish-to-dockerhub:
     needs: build-dmg
     runs-on: ubuntu-latest
@@ -29,6 +34,10 @@ jobs:
           VERSION=$(./cicd/version.sh)
           echo "Version: $VERSION"
           echo  "TAG_NAME=$VERSION" >> $GITHUB_ENV 
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: dmg-binary
       - name: Setup Docker buildx
         uses: docker/setup-buildx-action@v2
       - name: Login to Github Docker registry
