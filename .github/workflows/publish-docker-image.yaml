@@ -38,7 +38,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: dmg-binary
-          path: libdmg-hfsplus/build/dmg/dmg
+          path: libdmg-hfsplus/build/dmg
       - name: Setup Docker buildx
         uses: docker/setup-buildx-action@v2
       - name: Login to Github Docker registry
